@@ -1,5 +1,4 @@
 const router = require('express').Router()
-
 const { Note } = require('../models')
 
 const noteFinder = async (req, res, next) => {
