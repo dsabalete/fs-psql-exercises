@@ -1,6 +1,6 @@
 # Secrets for production compose
 
-These files are used by Docker secrets in `docker-compose.prod.yml`.
+These files are used by Docker secrets in `docker-compose.yml`.
 
 Required files:
 

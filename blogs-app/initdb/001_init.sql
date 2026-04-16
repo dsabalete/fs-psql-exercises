@@ -15,5 +15,11 @@ CREATE TABLE IF NOT EXISTS notes (
   date time
 );
 
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username TEXT NOT NULL,
+  name TEXT NOT NULL,
+  password_hash TEXT NOT NULL
+);
 insert into notes (content, important) values ('Relational databases rule the world', true);
 insert into notes (content, important) values ('MongoDB is webscale', false);
