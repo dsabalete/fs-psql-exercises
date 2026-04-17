@@ -11,8 +11,15 @@ User.init({
     },
     username: {
         type: DataTypes.STRING,
-        unique: true,
-        allowNull: false
+        unique: {
+            msg: 'Email address is already in use'
+        },
+        allowNull: false,
+        validate: {
+            isEmail: {
+                msg: 'Username must be a valid email address'
+            }
+        }
     },
     name: {
         type: DataTypes.STRING,

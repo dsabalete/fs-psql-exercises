@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     res.json(users)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
     const { username, name, password } = req.body
 
     const saltRounds = 10
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         const user = await User.create({ username, name, passwordHash })
         res.json(user)
     } catch (error) {
-        return res.status(400).json({ error })
+        next(error)
     }
 })
 
@@ -36,6 +36,16 @@ router.put('/:username', async (req, res) => {
         user.name = req.body.name
         await user.save()
         res.json(user)
+    } else {
+        res.status(404).end()
+    }
+})
+
+router.delete('/:username', async (req, res) => {
+    const user = await User.findOne({ where: { username: req.params.username } })
+    if (user) {
+        await user.destroy()
+        res.status(204).end()
     } else {
         res.status(404).end()
     }
