@@ -24,5 +24,5 @@ CREATE TABLE IF NOT EXISTS blogs (
   user_id INTEGER REFERENCES users(id)
 );
 
-insert into blogs (author, url, title, likes, user_id) values ('Tirant lo Blanc', 'https://lallardelllibre.com', 'First Adventures Tale in Catalan History', 0, 2);
-insert into blogs (author, url, title, likes, user_id) values ('Mecanoscrit del segon origen', 'https://mecanoscrit.com', 'Post-apocaliptic novel', 0, 4);
+insert into blogs (author, url, title, likes, user_id) values ('Joanot Martorell',  'https://lallardelllibre.com', 'Tirant lo Blanc', 1000, 2);
+insert into blogs (author, url, title, likes, user_id) values ('Manuel de Pedrolo', 'https://mecanoscrit.com', 'Mecanoscrit del segon origen', 1500, 4);
