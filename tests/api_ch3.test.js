@@ -4,6 +4,7 @@ const axios = require('axios')
 const { baseUrl, resetAndSeed } = require('./helper')
 
 let testData
+const validYear = new Date().getFullYear()
 
 before(async () => {
   testData = await resetAndSeed()
@@ -22,7 +23,8 @@ describe('Blogs API', () => {
     const newBlog = {
       title: 'Test Blog Post',
       author: 'Test Author',
-      url: 'https://example.com/test-blog'
+      url: 'https://example.com/test-blog',
+      yearWritten: validYear
     }
 
     const response = await axios.post(`${baseUrl}/blogs`, newBlog, {
@@ -34,6 +36,26 @@ describe('Blogs API', () => {
     assert.strictEqual(response.data.author, newBlog.author)
     assert.strictEqual(response.data.url, newBlog.url)
     assert.strictEqual(response.data.likes, 0)
+  })
+
+  it('returns custom validation message when yearWritten is out of range', async () => {
+    const invalidBlog = {
+      title: 'Invalid Year Blog',
+      author: 'Test Author',
+      url: 'https://example.com/invalid-year',
+      yearWritten: 1900
+    }
+
+    try {
+      await axios.post(`${baseUrl}/blogs`, invalidBlog, {
+        headers: { Authorization: `Bearer ${testData.tokens[0]}` }
+      })
+      assert.fail('Should have thrown an error')
+    } catch (error) {
+      assert.strictEqual(error.response.status, 400)
+      assert.ok(Array.isArray(error.response.data.error))
+      assert.ok(error.response.data.error.includes('Year must be between 1991 and the current year'))
+    }
   })
 
   it('created blog appears in blogs list', async () => {
