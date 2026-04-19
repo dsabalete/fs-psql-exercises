@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "migration:down": "node util/rollback.js",
-    "test": "node --test --test-concurrency=1 tests/api_ch3.test.js",
+    "test": "node --test --test-concurrency=1 tests/api_ch4.test.js",
     "start:prod": "ENV_FILE=.env.prod node index.js",
     "prod:db:up": "docker compose --env-file .env.prod -f docker-compose.prod.yml up -d postgres",
     "prod:db:down": "docker compose --env-file .env.prod -f docker-compose.prod.yml down -v",
