@@ -59,7 +59,8 @@ ReadingList.init({
     sequelize,
     underscored: true,
     timestamps: false,
-    modelName: 'reading_list',
+    modelName: 'readinglists',
+    tableName: 'reading_lists',
     validate: {
         async validUserId() {
             if (!Number.isInteger(this.userId) || this.userId < 1) {
